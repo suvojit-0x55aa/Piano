@@ -3,13 +3,20 @@
 #include <dos.h>
 #include <graphics.h>
 #include <stdlib.h>
-void pno(int);
-void pnobody(void);
-float piano(int);
-main()
-{
+
+// This program simulates a graphical piano interface where users can interact
+// with the piano keys using keyboard inputs. Each key corresponds to a specific
+// sound and visual representation.
+
+void pno(int); // Function to play a sound based on the input frequency.
+void pnobody(void); // Function to draw the piano keys and interface.
+float piano(int); // Function to calculate piano-related values (not used in main).
+
+int main() {
+    // Initialize graphics and variables
     int driver = DETECT, mode;
     char c;
+    // Define key shapes for the piano
     int k1[] = { 0, 0, 20, 0, 20, 60, 30, 60, 30, 100, 0, 100, 0, 0 };
     int k2[] = { 40, 0, 50, 0, 50, 60, 60, 60, 60, 100, 30, 100, 30, 60, 40, 60, 40, 0 };
     int k3[] = { 70, 0, 90, 0, 90, 100, 60, 100, 60, 60, 70, 60, 70, 0 };
@@ -22,13 +29,18 @@ main()
     int k10[] = { 280, 0, 300, 0, 300, 100, 270, 100, 270, 60, 280, 60, 280, 0 };
     int k11[] = { 300, 0, 330, 0, 330, 100, 300, 100, 300, 0 };
     int k12[] = { 330, 0, 360, 0, 360, 100, 330, 100, 330, 0 };
-    initgraph(&driver, &mode, "");
-    int maxx = getmaxx();
-    int maxy = getmaxy();
+    
+    initgraph(&driver, &mode, ""); // Initialize the graphics mode
+    int maxx = getmaxx(); // Get maximum x-coordinate
+    int maxy = getmaxy(); // Get maximum y-coordinate
+
+    // Draw random pixels on the screen for visual effect
     for (long j = 0; j <= 300; j++) {
         putpixel(random(maxx), random(maxy), 4);
         delay(1);
     }
+
+    // Draw the piano interface
     setfillstyle(SOLID_FILL, BLACK);
     bar(89, 39, 571, 261);
     setlinestyle(SOLID_LINE, 3, 3);
@@ -127,274 +139,277 @@ main()
     fillpoly(5, poly8);
     setviewport(150, 150, 510, 250, 1);
     pnobody();
-    c = getch();
+    c = getch(); // Wait for user input
     do {
         switch (c) {
-        case 'q': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k1);
-            pno(261);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k1);
-            break;
+            // Each case corresponds to a key press that triggers a sound and visual effect
+            case 'q': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k1);
+                pno(261); // Play sound for key 'q'
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k1);
+                break;
+            }
+            case 'w': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(9, k2);
+                pno(293);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k2);
+                pnobody();
+                break;
+            }
+            case 'e': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k3);
+                pno(329);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k3);
+                pnobody();
+                break;
+            }
+            case 'r': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k4);
+                pno(350);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k4);
+                pnobody();
+                break;
+            }
+            case 't': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(9, k5);
+                pno(392);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k5);
+                pnobody();
+                break;
+            }
+            case 'y': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(9, k6);
+                pno(440);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k6);
+                pnobody();
+                break;
+            }
+            case 'u': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k7);
+                pno(493);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k7);
+                pnobody();
+                break;
+            }
+            case 'i': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k8);
+                pno(523);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k8);
+                pnobody();
+                break;
+            }
+            case 'o': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(9, k9);
+                pno(587);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k9);
+                pnobody();
+                break;
+            }
+            case 'p': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k10);
+                pno(659);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k10);
+                pnobody();
+                break;
+            }
+            case '[': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(5, k11);
+                pno(698);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(5, k11);
+                pnobody();
+                break;
+            }
+            case ']': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(5, k12);
+                pno(784);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(5, k12);
+                pnobody();
+                break;
+            }
+            case '1': {
+                setfillstyle(SOLID_FILL, YELLOW);
+                bar(20, 0, 40, 60);
+                pno(311);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(20, 0, 40, 60);
+                pnobody();
+                break;
+            }
+            case '2': {
+                setfillstyle(SOLID_FILL, WHITE);
+                bar(50, 0, 70, 60);
+                pno(370);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(50, 0, 70, 60);
+                pnobody();
+                break;
+            }
+            case '4': {
+                setfillstyle(SOLID_FILL, YELLOW);
+                bar(110, 0, 130, 60);
+                pno(415);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(110, 0, 130, 60);
+                pnobody();
+                break;
+            }
+            case '5': {
+                setfillstyle(SOLID_FILL, WHITE);
+                bar(140, 0, 160, 60);
+                pno(466);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(140, 0, 160, 60);
+                pnobody();
+                break;
+            }
+            case '6': {
+                setfillstyle(SOLID_FILL, YELLOW);
+                bar(170, 0, 190, 60);
+                pno(554);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(170, 0, 190, 60);
+                pnobody();
+                break;
+            }
+            case '8': {
+                setfillstyle(SOLID_FILL, WHITE);
+                bar(230, 0, 250, 60);
+                pno(662);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(230, 0, 250, 60);
+                pnobody();
+                break;
+            }
+            case '9': {
+                setfillstyle(SOLID_FILL, YELLOW);
+                bar(260, 0, 280, 60);
+                pno(740);
+                setfillstyle(SOLID_FILL, BLACK);
+                bar(260, 0, 280, 60);
+                pnobody();
+                break;
+            }
+            case 'Q': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k1);
+                pno(261);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k1);
+                break;
+            }
+            case 'W': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(9, k2);
+                pno(293);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k2);
+                pnobody();
+                break;
+            }
+            case 'E': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k3);
+                pno(329);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k3);
+                pnobody();
+                break;
+            }
+            case 'R': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k4);
+                pno(350);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k4);
+                pnobody();
+                break;
+            }
+            case 'T': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(9, k5);
+                pno(392);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k5);
+                pnobody();
+                break;
+            }
+            case 'Y': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(9, k6);
+                pno(440);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k6);
+                pnobody();
+                break;
+            }
+            case 'U': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(7, k7);
+                pno(493);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k7);
+                pnobody();
+                break;
+            }
+            case 'I': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k8);
+                pno(523);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k8);
+                pnobody();
+                break;
+            }
+            case 'O': {
+                setfillstyle(SOLID_FILL, GREEN);
+                fillpoly(9, k9);
+                pno(587);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(9, k9);
+                pnobody();
+                break;
+            }
+            case 'P': {
+                setfillstyle(SOLID_FILL, RED);
+                fillpoly(7, k10);
+                pno(659);
+                setfillstyle(SOLID_FILL, BLUE);
+                fillpoly(7, k10);
+                pnobody();
+                break;
+            }
+            case ' ': {
+                break; // Exit the loop on space key
+            }
         }
-        case 'w': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(9, k2);
-            pno(293);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k2);
-            pnobody();
-            break;
-        }
-        case 'e': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k3);
-            pno(329);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k3);
-            pnobody();
-            break;
-        }
-        case 'r': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k4);
-            pno(350);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k4);
-            pnobody();
-            break;
-        }
-        case 't': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(9, k5);
-            pno(392);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k5);
-            pnobody();
-            break;
-        }
-        case 'y': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(9, k6);
-            pno(440);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k6);
-            pnobody();
-            break;
-        }
-        case 'u': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k7);
-            pno(493);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k7);
-            pnobody();
-            break;
-        }
-        case 'i': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k8);
-            pno(523);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k8);
-            pnobody();
-            break;
-        }
-        case 'o': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(9, k9);
-            pno(587);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k9);
-            pnobody();
-            break;
-        }
-        case 'p': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k10);
-            pno(659);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k10);
-            pnobody();
-            break;
-        }
-        case '[': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(5, k11);
-            pno(698);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(5, k11);
-            pnobody();
-            break;
-        }
-        case ']': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(5, k12);
-            pno(784);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(5, k12);
-            pnobody();
-            break;
-        }
-        case '1': {
-            setfillstyle(SOLID_FILL, YELLOW);
-            bar(20, 0, 40, 60);
-            pno(311);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(20, 0, 40, 60);
-            pnobody();
-            break;
-        }
-        case '2': {
-            setfillstyle(SOLID_FILL, WHITE);
-            bar(50, 0, 70, 60);
-            pno(370);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(50, 0, 70, 60);
-            pnobody();
-            break;
-        }
-        case '4': {
-            setfillstyle(SOLID_FILL, YELLOW);
-            bar(110, 0, 130, 60);
-            pno(415);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(110, 0, 130, 60);
-            pnobody();
-            break;
-        }
-        case '5': {
-            setfillstyle(SOLID_FILL, WHITE);
-            bar(140, 0, 160, 60);
-            pno(466);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(140, 0, 160, 60);
-            pnobody();
-            break;
-        }
-        case '6': {
-            setfillstyle(SOLID_FILL, YELLOW);
-            bar(170, 0, 190, 60);
-            pno(554);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(170, 0, 190, 60);
-            pnobody();
-            break;
-        }
-        case '8': {
-            setfillstyle(SOLID_FILL, WHITE);
-            bar(230, 0, 250, 60);
-            pno(662);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(230, 0, 250, 60);
-            pnobody();
-            break;
-        }
-        case '9': {
-            setfillstyle(SOLID_FILL, YELLOW);
-            bar(260, 0, 280, 60);
-            pno(740);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(260, 0, 280, 60);
-            pnobody();
-            break;
-        }
-        case 'Q': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k1);
-            pno(261);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k1);
-            break;
-        }
-        case 'W': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(9, k2);
-            pno(293);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k2);
-            pnobody();
-            break;
-        }
-        case 'E': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k3);
-            pno(329);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k3);
-            pnobody();
-            break;
-        }
-        case 'R': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k4);
-            pno(350);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k4);
-            pnobody();
-            break;
-        }
-        case 'T': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(9, k5);
-            pno(392);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k5);
-            pnobody();
-            break;
-        }
-        case 'Y': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(9, k6);
-            pno(440);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k6);
-            pnobody();
-            break;
-        }
-        case 'U': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(7, k7);
-            pno(493);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k7);
-            pnobody();
-            break;
-        }
-        case 'I': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k8);
-            pno(523);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k8);
-            pnobody();
-            break;
-        }
-        case 'O': {
-            setfillstyle(SOLID_FILL, GREEN);
-            fillpoly(9, k9);
-            pno(587);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(9, k9);
-            pnobody();
-            break;
-        }
-        case 'P': {
-            setfillstyle(SOLID_FILL, RED);
-            fillpoly(7, k10);
-            pno(659);
-            setfillstyle(SOLID_FILL, BLUE);
-            fillpoly(7, k10);
-            pnobody();
-            break;
-        }
-        case ' ': {
-            break;
-        }
-        }
-        c = getch();
-    } while (c != ' ');
+        c = getch(); // Wait for the next key press
+    } while (c != ' '); // Continue until space is pressed
+
+    // Clear the screen and display credits
     setviewport(0, 0, maxx, maxy, 1);
     cleardevice();
     for (j = 0; j <= 1100; j++) {
@@ -416,10 +431,11 @@ main()
     outtextxy(200, 300, " #Sourav Kundu:Final Compilation");
     outtextxy(210, 305, "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ");
     getch();
-    return 0;
+    return 0; // End of the program
 }
-void pnobody(void)
-{
+
+void pnobody(void) {
+    // Draw the piano keys and the interface
     rectangle(0, 0, 360, 100);
     rectangle(20, 0, 40, 60);
     rectangle(50, 0, 70, 60);
@@ -441,10 +457,11 @@ void pnobody(void)
     }
     return;
 }
-void pno(int x)
-{
+
+void pno(int x) {
+    // Play a sound based on the input frequency
     sound(x);
-    delay(130);
-    nosound();
+    delay(130); // Duration of the sound
+    nosound(); // Stop the sound
     return;
 }
